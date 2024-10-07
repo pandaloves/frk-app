@@ -1,5 +1,10 @@
 name: Deploy-frontend-to-stage
-on: push
+on: 
+  push:
+    branches:
+      - main
+    paths:
+      - 'package.json'
 jobs:
   any-job: 
     runs-on: ubuntu-latest
