@@ -9,5 +9,13 @@ jobs:
   any-job: 
     runs-on: ubuntu-latest
     steps: 
-      - name: any-step
-        run: echo "Hello world"
+      - name: Check for version change
+        id: version_changed
+        uses: EndBug/version-check@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          diff-search: true # Search for changes in the last commit
+      - name: hello-world
+        run: echo "hello world"
+      
+      
