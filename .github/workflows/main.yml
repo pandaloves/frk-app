@@ -1,4 +1,4 @@
-name: Deploy-frontend-to-stage
+name: deploy-frontend-to-stage
 on: 
   push:
     branches:
@@ -6,8 +6,26 @@ on:
     paths:
       - 'package.json'
 jobs:
-  any-job: 
+  deploy-to-stage:
     runs-on: ubuntu-latest
-    steps: 
-      - name: any-step
-        run: echo "Hello world"
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org/'
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Important for the next step to have the complete git history
+          
+      - name: Check for version change
+        id: version_changed
+        uses: EndBug/version-check@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          diff-search: true # Search for changes in the last commit
+      
+      - name: hello-world
+        run: echo "Hello World"
+      
