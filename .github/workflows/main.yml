@@ -1,0 +1,8 @@
+name: Deploy-frontend-to-stage
+on: push
+jobs:
+  any-job: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: any-step
+        run: echo "Hello world"
